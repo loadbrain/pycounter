@@ -8,10 +8,11 @@ import logging
 import re
 
 import arrow
+from lxml import etree
 import six
 
 from pycounter import csvhelper
-from pycounter.constants import CODES, HEADER_FIELDS, METRICS
+from pycounter.constants import CODES, HEADER_FIELDS, METRICS, NS
 from pycounter.constants import REPORT_DESCRIPTIONS, TOTAL_TEXT
 from pycounter.exceptions import PycounterException, UnknownReportTypeError
 from pycounter.helpers import convert_covered, convert_date_column, \
@@ -241,6 +242,22 @@ class CounterReport(object):
                         metric=metric,
                         month_data=[(self.period[0], 0), ]
                     ))
+
+    def as_xml(self):
+        """
+        convert report to COUNTER XML
+
+        :return: str
+        """
+        root = etree.Element("Report",
+                             xmlns=NS['counter'],
+                             Title=u"Journal Report 1",
+                             Name=self.report_type,
+                             Version=str(self.report_version),
+                             ID=u"exampleuser:JR1",
+                             )
+
+        return etree.tostring(root)
 
 
 class CounterEresource(six.Iterator):
