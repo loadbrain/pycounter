@@ -7,7 +7,7 @@
 * /home/wera/pycounter
 </pre>
 
-Ist ein Fork von https://adis.blb-intranet.de/
+Ist ein Fork von https://github.com/pitthsls/pycounter
 
 ### Aufruf
 ```bash
